@@ -18,41 +18,44 @@ export const ProductCopywriter: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold text-white flex items-center gap-2">
+      <h2 className="text-xl font-bold flex items-center gap-2" style={{ color: "var(--text-primary)" }}>
         <span className="text-2xl">{"\uD83D\uDECD\uFE0F"}</span> Product Copywriter
       </h2>
 
       <div>
-        <label className="block text-sm text-white/60 mb-1">Product Name</label>
+        <label className="block text-sm mb-1" style={{ color: "var(--text-tertiary)" }}>Product Name</label>
         <input
           value={product}
           onChange={(e) => setProduct(e.target.value)}
           placeholder="e.g., Wireless Noise-Cancelling Headphones"
-          className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-amber-500"
+          className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+          style={{ background: "var(--input-bg)", border: "1px solid var(--border-primary)", color: "var(--text-primary)" }}
         />
       </div>
 
       <div>
-        <label className="block text-sm text-white/60 mb-1">Platform</label>
+        <label className="block text-sm mb-1" style={{ color: "var(--text-tertiary)" }}>Platform</label>
         <select
           value={platform}
           onChange={(e) => setPlatform(e.target.value)}
-          className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+          className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+          style={{ background: "var(--input-bg)", border: "1px solid var(--border-primary)", color: "var(--text-primary)" }}
         >
           {PLATFORMS.map((p) => (
-            <option key={p} value={p} className="bg-gray-900">{p}</option>
+            <option key={p} value={p} style={{ background: "var(--select-bg)" }}>{p}</option>
           ))}
         </select>
       </div>
 
       <div>
-        <label className="block text-sm text-white/60 mb-1">Product Details</label>
+        <label className="block text-sm mb-1" style={{ color: "var(--text-tertiary)" }}>Product Details</label>
         <textarea
           value={details}
           onChange={(e) => setDetails(e.target.value)}
           placeholder="Features, materials, dimensions, target audience, unique selling points..."
           rows={4}
-          className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-amber-500 resize-none"
+          className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 resize-none"
+          style={{ background: "var(--input-bg)", border: "1px solid var(--border-primary)", color: "var(--text-primary)" }}
         />
       </div>
 

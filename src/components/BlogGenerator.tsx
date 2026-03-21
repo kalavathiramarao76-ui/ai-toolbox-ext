@@ -18,42 +18,45 @@ export const BlogGenerator: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold text-white flex items-center gap-2">
+      <h2 className="text-xl font-bold flex items-center gap-2" style={{ color: "var(--text-primary)" }}>
         <span className="text-2xl">{"\uD83D\uDCF0"}</span> Blog Post Generator
       </h2>
 
       <div>
-        <label className="block text-sm text-white/60 mb-1">Topic</label>
+        <label className="block text-sm mb-1" style={{ color: "var(--text-tertiary)" }}>Topic</label>
         <input
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
           placeholder="e.g., How AI is transforming healthcare in 2025"
-          className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+          style={{ background: "var(--input-bg)", border: "1px solid var(--border-primary)", color: "var(--text-primary)" }}
         />
       </div>
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="block text-sm text-white/60 mb-1">Style</label>
+          <label className="block text-sm mb-1" style={{ color: "var(--text-tertiary)" }}>Style</label>
           <select
             value={style}
             onChange={(e) => setStyle(e.target.value)}
-            className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+            style={{ background: "var(--input-bg)", border: "1px solid var(--border-primary)", color: "var(--text-primary)" }}
           >
             {STYLES.map((s) => (
-              <option key={s} value={s} className="bg-gray-900">
+              <option key={s} value={s} style={{ background: "var(--select-bg)" }}>
                 {s.charAt(0).toUpperCase() + s.slice(1)}
               </option>
             ))}
           </select>
         </div>
         <div>
-          <label className="block text-sm text-white/60 mb-1">SEO Keywords</label>
+          <label className="block text-sm mb-1" style={{ color: "var(--text-tertiary)" }}>SEO Keywords</label>
           <input
             value={keywords}
             onChange={(e) => setKeywords(e.target.value)}
             placeholder="ai, healthcare, 2025"
-            className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+            style={{ background: "var(--input-bg)", border: "1px solid var(--border-primary)", color: "var(--text-primary)" }}
           />
         </div>
       </div>

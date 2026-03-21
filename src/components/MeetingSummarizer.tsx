@@ -14,12 +14,12 @@ export const MeetingSummarizer: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold text-white flex items-center gap-2">
+      <h2 className="text-xl font-bold flex items-center gap-2" style={{ color: "var(--text-primary)" }}>
         <span className="text-2xl">{"\uD83D\uDCDD"}</span> Meeting Summarizer
       </h2>
 
       <div>
-        <label className="block text-sm text-white/60 mb-1">
+        <label className="block text-sm mb-1" style={{ color: "var(--text-tertiary)" }}>
           Paste Meeting Transcript
         </label>
         <textarea
@@ -27,7 +27,8 @@ export const MeetingSummarizer: React.FC = () => {
           onChange={(e) => setTranscript(e.target.value)}
           placeholder="Paste your meeting transcript or notes here..."
           rows={8}
-          className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+          className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+          style={{ background: "var(--input-bg)", border: "1px solid var(--border-primary)", color: "var(--text-primary)" }}
         />
       </div>
 

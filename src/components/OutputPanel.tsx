@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { addFavorite } from "../utils/storage";
+import { useToast } from "./Toast";
 
 interface Props {
   output: string;
@@ -16,13 +17,31 @@ export const OutputPanel: React.FC<Props> = ({
   toolName,
   onStop,
 }) => {
-  const [copied, setCopied] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const { toast } = useToast();
+  const prevLoadingRef = useRef(loading);
+
+  // Fire toast when generation completes
+  useEffect(() => {
+    if (prevLoadingRef.current && !loading && output && !error) {
+      toast("Generation complete!", "success");
+    }
+    prevLoadingRef.current = loading;
+  }, [loading, output, error, toast]);
+
+  // Fire toast on error
+  useEffect(() => {
+    if (error) {
+      toast(error, "error");
+    }
+  }, [error, toast]);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(output);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(output);
+      toast("Copied to clipboard", "success");
+    } catch {
+      toast("Failed to copy", "error");
+    }
   };
 
   const handleSave = () => {
@@ -31,16 +50,15 @@ export const OutputPanel: React.FC<Props> = ({
       title: output.slice(0, 60) + (output.length > 60 ? "..." : ""),
       content: output,
     });
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+    toast("Saved to favorites", "info");
   };
 
   if (!output && !loading && !error) return null;
 
   return (
-    <div className="mt-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2 border-b border-white/10 bg-white/5">
-        <span className="text-sm font-medium text-white/70">Output</span>
+    <div className="mt-4 rounded-xl overflow-hidden" style={{ border: "1px solid var(--border-primary)", background: "var(--bg-elevated)" }}>
+      <div className="flex items-center justify-between px-4 py-2" style={{ borderBottom: "1px solid var(--border-primary)", background: "var(--bg-elevated)" }}>
+        <span className="text-sm font-medium" style={{ color: "var(--text-secondary)" }}>Output</span>
         <div className="flex gap-2">
           {loading && onStop && (
             <button
@@ -54,15 +72,16 @@ export const OutputPanel: React.FC<Props> = ({
             <>
               <button
                 onClick={handleCopy}
-                className="px-3 py-1 text-xs rounded-lg bg-white/10 text-white/70 hover:bg-white/20 transition-colors"
+                className="px-3 py-1 text-xs rounded-lg transition-colors"
+                style={{ background: "var(--bg-elevated-hover)", color: "var(--text-secondary)" }}
               >
-                {copied ? "Copied!" : "Copy"}
+                Copy
               </button>
               <button
                 onClick={handleSave}
                 className="px-3 py-1 text-xs rounded-lg bg-violet-500/20 text-violet-400 hover:bg-violet-500/30 transition-colors"
               >
-                {saved ? "Saved!" : "Favorite"}
+                Favorite
               </button>
             </>
           )}
@@ -72,7 +91,7 @@ export const OutputPanel: React.FC<Props> = ({
         {error ? (
           <p className="text-red-400 text-sm">{error}</p>
         ) : (
-          <div className="text-sm text-white/90 whitespace-pre-wrap leading-relaxed font-mono">
+          <div className="text-sm whitespace-pre-wrap leading-relaxed font-mono" style={{ color: "var(--text-primary)" }}>
             {output}
             {loading && (
               <span className="inline-block w-2 h-4 bg-violet-400 animate-pulse ml-0.5" />

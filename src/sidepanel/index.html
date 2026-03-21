@@ -4,6 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Toolbox — Workspace</title>
+  <script>
+    // FOUC prevention: apply saved theme before paint
+    (function() {
+      try {
+        var mode = localStorage.getItem('ai_toolbox_theme_mode') || 'dark';
+        var resolved = mode;
+        if (mode === 'system') {
+          resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.classList.remove('dark', 'light');
+        document.documentElement.classList.add(resolved);
+        document.documentElement.setAttribute('data-theme', resolved);
+      } catch(e) {}
+    })();
+  </script>
 </head>
 <body>
   <div id="root"></div>

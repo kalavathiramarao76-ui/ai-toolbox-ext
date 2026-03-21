@@ -1,5 +1,6 @@
 import React from "react";
 import { TOOLS } from "../utils/tools";
+import { ThemeToggle } from "../components/ThemeToggle";
 
 export const Popup: React.FC = () => {
   const openSidePanel = (toolId?: string) => {
@@ -11,11 +12,14 @@ export const Popup: React.FC = () => {
   };
 
   return (
-    <div className="w-[360px] p-4 bg-[#0f0f1a] min-h-[400px]">
+    <div className="w-[360px] p-4 min-h-[400px]" style={{ background: "var(--bg-primary)" }}>
       {/* Header */}
-      <div className="text-center mb-4">
-        <h1 className="text-2xl font-bold gradient-text">AI Toolbox</h1>
-        <p className="text-xs text-white/40 mt-1">6 AI tools at your fingertips</p>
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <h1 className="text-2xl font-bold gradient-text">AI Toolbox</h1>
+          <p className="text-xs mt-1" style={{ color: "var(--text-tertiary)" }}>6 AI tools at your fingertips</p>
+        </div>
+        <ThemeToggle />
       </div>
 
       {/* Tool Grid */}
@@ -33,10 +37,10 @@ export const Popup: React.FC = () => {
                 {tool.icon}
               </div>
               <div className="min-w-0">
-                <h3 className="text-sm font-semibold text-white/90 leading-tight">
+                <h3 className="text-sm font-semibold leading-tight" style={{ color: "var(--text-primary)" }}>
                   {tool.name}
                 </h3>
-                <p className="text-[10px] text-white/40 mt-0.5 leading-snug line-clamp-2">
+                <p className="text-[10px] mt-0.5 leading-snug line-clamp-2" style={{ color: "var(--text-tertiary)" }}>
                   {tool.description}
                 </p>
               </div>
@@ -46,14 +50,14 @@ export const Popup: React.FC = () => {
       </div>
 
       {/* Footer */}
-      <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
+      <div className="mt-4 pt-3 flex items-center justify-between" style={{ borderTop: "1px solid var(--border-primary)" }}>
         <button
           onClick={() => openSidePanel()}
           className="text-xs text-violet-400 hover:text-violet-300 transition-colors"
         >
           Open full workspace
         </button>
-        <span className="text-[10px] text-white/20">v1.0</span>
+        <span className="text-[10px]" style={{ color: "var(--text-tertiary)" }}>v1.0</span>
       </div>
     </div>
   );
