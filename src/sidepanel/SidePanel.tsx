@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { TOOLS } from "../utils/tools";
 import { EmailWriter } from "../components/EmailWriter";
 import { MeetingSummarizer } from "../components/MeetingSummarizer";
@@ -8,6 +8,8 @@ import { ProductCopywriter } from "../components/ProductCopywriter";
 import { TweetThreadCreator } from "../components/TweetThreadCreator";
 import { Favorites } from "../components/Favorites";
 import { ThemeToggle } from "../components/ThemeToggle";
+import { CommandPalette } from "../components/CommandPalette";
+import { OnboardingTour } from "../components/OnboardingTour";
 
 const TOOL_COMPONENTS: Record<string, React.FC> = {
   email: EmailWriter,
@@ -21,6 +23,21 @@ const TOOL_COMPONENTS: Record<string, React.FC> = {
 export const SidePanel: React.FC = () => {
   const [activeTab, setActiveTab] = useState("email");
   const [showFavorites, setShowFavorites] = useState(false);
+
+  const handleSelectTool = useCallback((toolId: string) => {
+    setActiveTab(toolId);
+    setShowFavorites(false);
+  }, []);
+
+  const handleToggleFavorites = useCallback(() => {
+    setShowFavorites((prev) => !prev);
+  }, []);
+
+  const handleToggleTheme = useCallback(() => {
+    // Find the ThemeToggle button and click it
+    const btn = document.querySelector('[title^="Theme:"]') as HTMLButtonElement | null;
+    btn?.click();
+  }, []);
 
   // Listen for tool selection from popup/context menu
   useEffect(() => {
@@ -38,6 +55,16 @@ export const SidePanel: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "var(--bg-primary)" }}>
+      {/* Command Palette */}
+      <CommandPalette
+        onSelectTool={handleSelectTool}
+        onToggleFavorites={handleToggleFavorites}
+        onToggleTheme={handleToggleTheme}
+      />
+
+      {/* Onboarding Tour */}
+      <OnboardingTour />
+
       {/* Header */}
       <header className="sticky top-0 z-10 glass px-4 py-3" style={{ borderBottom: "1px solid var(--border-primary)" }}>
         <div className="flex items-center justify-between">
