@@ -10,6 +10,7 @@ import { Favorites } from "../components/Favorites";
 import { ThemeToggle } from "../components/ThemeToggle";
 import { CommandPalette } from "../components/CommandPalette";
 import { OnboardingTour } from "../components/OnboardingTour";
+import { Settings } from "../components/Settings";
 
 const TOOL_COMPONENTS: Record<string, React.FC> = {
   email: EmailWriter,
@@ -23,14 +24,17 @@ const TOOL_COMPONENTS: Record<string, React.FC> = {
 export const SidePanel: React.FC = () => {
   const [activeTab, setActiveTab] = useState("email");
   const [showFavorites, setShowFavorites] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   const handleSelectTool = useCallback((toolId: string) => {
     setActiveTab(toolId);
     setShowFavorites(false);
+    setShowSettings(false);
   }, []);
 
   const handleToggleFavorites = useCallback(() => {
     setShowFavorites((prev) => !prev);
+    setShowSettings(false);
   }, []);
 
   const handleToggleTheme = useCallback(() => {
@@ -81,12 +85,26 @@ export const SidePanel: React.FC = () => {
             >
               {"\u2B50"}
             </button>
+            <button
+              onClick={() => { setShowSettings((prev) => !prev); setShowFavorites(false); }}
+              className={`p-1.5 rounded-lg transition-colors text-sm ${
+                showSettings
+                  ? "bg-violet-500/20 text-violet-400"
+                  : "text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)]"
+              }`}
+              title="Settings"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+              </svg>
+            </button>
             <ThemeToggle />
           </div>
         </div>
 
         {/* Tool Tabs */}
-        {!showFavorites && (
+        {!showFavorites && !showSettings && (
           <div className="flex gap-1 mt-3 overflow-x-auto pb-1 scrollbar-hide">
             {TOOLS.map((tool) => (
               <button
@@ -108,7 +126,7 @@ export const SidePanel: React.FC = () => {
 
       {/* Content */}
       <main className="flex-1 p-4 overflow-y-auto">
-        {showFavorites ? <Favorites /> : ActiveComponent && <ActiveComponent />}
+        {showSettings ? <Settings /> : showFavorites ? <Favorites /> : ActiveComponent && <ActiveComponent />}
       </main>
 
       {/* Footer */}

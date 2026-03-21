@@ -1,5 +1,19 @@
-const API_URL = "https://sai.sharedllm.com/v1/chat/completions";
-const MODEL = "gpt-oss:120b";
+import { getSettingsSync } from "../components/Settings";
+
+const DEFAULT_API_URL = "https://sai.sharedllm.com/v1/chat/completions";
+const DEFAULT_MODEL = "gpt-oss:120b";
+
+function getApiConfig() {
+  try {
+    const settings = getSettingsSync();
+    return {
+      url: settings.endpointUrl || DEFAULT_API_URL,
+      model: settings.model || DEFAULT_MODEL,
+    };
+  } catch {
+    return { url: DEFAULT_API_URL, model: DEFAULT_MODEL };
+  }
+}
 
 export interface Message {
   role: "system" | "user" | "assistant";
@@ -15,11 +29,12 @@ export async function streamCompletion(
   const controller = new AbortController();
 
   try {
-    const res = await fetch(API_URL, {
+    const config = getApiConfig();
+    const res = await fetch(config.url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: MODEL,
+        model: config.model,
         messages,
         stream: true,
         max_tokens: 4096,
@@ -77,11 +92,12 @@ export async function streamCompletion(
 }
 
 export async function completion(messages: Message[]): Promise<string> {
-  const res = await fetch(API_URL, {
+  const config = getApiConfig();
+  const res = await fetch(config.url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: MODEL,
+      model: config.model,
       messages,
       max_tokens: 4096,
       temperature: 0.7,
