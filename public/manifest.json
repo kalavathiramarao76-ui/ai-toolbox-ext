@@ -1,10 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "ToolSpark AI — 6-in-1 AI Writing & Productivity Suite",
-  "short_name": "ToolSpark AI",
+  "name": "SixForge \u2014 6-in-1 AI Writing & Productivity Suite",
+  "short_name": "SixForge",
   "version": "1.0.0",
   "description": "6 AI tools in one Chrome extension: Email Writer, Meeting Summarizer, Code Reviewer, Blog Generator & more. Free.",
-  "permissions": ["sidePanel", "contextMenus", "activeTab", "storage"],
+  "permissions": [
+    "sidePanel",
+    "contextMenus",
+    "activeTab",
+    "storage"
+  ],
   "action": {
     "default_popup": "src/popup/index.html",
     "default_icon": {
@@ -23,8 +28,12 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content/content.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/content.js"
+      ],
       "css": []
     }
   ],
@@ -34,5 +43,7 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "host_permissions": ["https://sai.sharedllm.com/*"]
+  "host_permissions": [
+    "https://sai.sharedllm.com/*"
+  ]
 }

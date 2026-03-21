@@ -255,7 +255,7 @@ export const Settings: React.FC = () => {
           </div>
           <div className="flex justify-between">
             <span className="text-xs" style={{ color: "var(--text-secondary)" }}>Extension</span>
-            <span className="text-xs font-medium gradient-text">ToolSpark AI</span>
+            <span className="text-xs font-medium gradient-text">SixForge</span>
           </div>
           <div className="flex justify-between">
             <span className="text-xs" style={{ color: "var(--text-secondary)" }}>Tools</span>

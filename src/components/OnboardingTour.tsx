@@ -98,7 +98,7 @@ export const OnboardingTour: React.FC = () => {
 
   const steps: StepConfig[] = [
     {
-      title: "Welcome to ToolSpark AI",
+      title: "Welcome to SixForge",
       subtitle: "6 powerful AI tools, one extension",
       content: (
         <div className="grid grid-cols-2 gap-2 mt-4">

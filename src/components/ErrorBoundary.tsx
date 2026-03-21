@@ -21,7 +21,7 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    console.error("[ToolSpark] Uncaught error:", error, info.componentStack);
+    console.error("[SixForge] Uncaught error:", error, info.componentStack);
   }
 
   handleRetry = () => {

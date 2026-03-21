@@ -16,7 +16,7 @@ export const Popup: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h1 className="text-2xl font-bold gradient-text">ToolSpark AI</h1>
+          <h1 className="text-2xl font-bold gradient-text">SixForge</h1>
           <p className="text-xs mt-1" style={{ color: "var(--text-tertiary)" }}>6 AI-powered productivity tools</p>
         </div>
         <ThemeToggle />
