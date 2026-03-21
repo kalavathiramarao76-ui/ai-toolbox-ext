@@ -41,7 +41,7 @@ export const SidePanel: React.FC = () => {
       {/* Header */}
       <header className="sticky top-0 z-10 glass px-4 py-3" style={{ borderBottom: "1px solid var(--border-primary)" }}>
         <div className="flex items-center justify-between">
-          <h1 className="text-lg font-bold gradient-text">AI Toolbox</h1>
+          <h1 className="text-lg font-bold gradient-text">ToolSpark AI</h1>
           <div className="flex gap-2">
             <button
               onClick={() => setShowFavorites(!showFavorites)}
@@ -87,7 +87,7 @@ export const SidePanel: React.FC = () => {
       {/* Footer */}
       <footer className="px-4 py-2 text-center" style={{ borderTop: "1px solid var(--border-primary)" }}>
         <span className="text-[10px]" style={{ color: "var(--text-tertiary)" }}>
-          AI Toolbox v1.0 — Powered by AI
+          ToolSpark AI v1.0 — Powered by AI
         </span>
       </footer>
     </div>

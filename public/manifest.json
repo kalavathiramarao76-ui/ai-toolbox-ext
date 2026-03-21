@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "AI Toolbox",
+  "name": "ToolSpark AI — 6-in-1 AI Writing & Productivity Suite",
+  "short_name": "ToolSpark AI",
   "version": "1.0.0",
-  "description": "6 AI-powered micro-tools in one Chrome extension: Email Writer, Meeting Summarizer, Code Reviewer, Blog Generator, Product Copywriter, Tweet Thread Creator",
+  "description": "6 AI tools in one Chrome extension: Email Writer, Meeting Summarizer, Code Reviewer, Blog Generator & more. Free.",
   "permissions": ["sidePanel", "contextMenus", "activeTab", "storage"],
   "action": {
     "default_popup": "src/popup/index.html",
