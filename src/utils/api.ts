@@ -1,3 +1,4 @@
+import { incrementUsage } from "../shared/usage";
 import { getSettingsSync } from "../components/Settings";
 
 const DEFAULT_API_URL = "https://sai.sharedllm.com/v1/chat/completions";
@@ -26,6 +27,7 @@ export async function streamCompletion(
   onDone: () => void,
   onError: (err: Error) => void
 ): Promise<AbortController> {
+  incrementUsage();
   const controller = new AbortController();
 
   try {
