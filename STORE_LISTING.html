@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SixForge - 6-in-1 AI Writing Suite | Chrome Web Store</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--accent:#a855f7;--accent-dark:#7c3aed;--bg:#0f0a1a;--card:#1a1128;--card-border:#2d1f4e;--text:#e2e0e7;--text-muted:#9b95a8}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* Hero */
+  .hero{text-align:center;padding:80px 24px 60px;background:linear-gradient(180deg,#1a0f2e 0%,var(--bg) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 50% 50%,rgba(168,85,247,.08) 0%,transparent 50%);pointer-events:none}
+  .hero-icon{width:88px;height:88px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:42px;margin:0 auto 24px;box-shadow:0 8px 32px rgba(168,85,247,.3)}
+  .hero h1{font-size:48px;font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,#fff,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .hero .tagline{font-size:20px;color:var(--text-muted);margin:12px 0 8px;font-weight:500}
+  .hero .store-desc{font-size:15px;color:var(--text-muted);max-width:620px;margin:0 auto 28px}
+  .badge{display:inline-block;background:var(--accent);color:#fff;padding:6px 18px;border-radius:20px;font-size:13px;font-weight:600;letter-spacing:.5px}
+
+  /* Section */
+  .section{padding:60px 24px}
+  .section-title{text-align:center;font-size:32px;font-weight:700;margin-bottom:12px}
+  .section-sub{text-align:center;color:var(--text-muted);margin-bottom:40px;font-size:15px}
+
+  /* Feature Cards */
+  .tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto}
+  .tool-card{background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:28px;transition:transform .2s,box-shadow .2s}
+  .tool-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(168,85,247,.15)}
+  .tool-card .icon{font-size:32px;margin-bottom:12px}
+  .tool-card h3{font-size:17px;font-weight:700;margin-bottom:6px;color:#fff}
+  .tool-card p{font-size:13px;color:var(--text-muted);line-height:1.5}
+  .tool-card .tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+  .tool-card .tag{background:rgba(168,85,247,.12);color:var(--accent);padding:3px 10px;border-radius:8px;font-size:11px;font-weight:600}
+
+  /* Flow */
+  .flow{display:flex;align-items:flex-start;justify-content:center;gap:0;max-width:1000px;margin:0 auto;flex-wrap:wrap}
+  .flow-step{text-align:center;flex:1;min-width:160px;max-width:200px;position:relative;padding:0 10px}
+  .flow-step:not(:last-child)::after{content:'';position:absolute;top:28px;right:-10px;width:20px;height:2px;background:var(--accent);opacity:.5}
+  .flow-num{width:56px;height:56px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;margin:0 auto 14px;color:#fff}
+  .flow-step h4{font-size:14px;font-weight:700;margin-bottom:4px;color:#fff}
+  .flow-step p{font-size:12px;color:var(--text-muted)}
+
+  /* Mock UI */
+  .mock-section{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:1000px;margin:0 auto}
+  .mock{background:#1e1433;border:1px solid var(--card-border);border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.3)}
+  .mock-bar{background:#150f24;padding:8px 14px;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted)}
+  .mock-dot{width:8px;height:8px;border-radius:50%}
+  .mock-dot.r{background:#ef4444}.mock-dot.y{background:#eab308}.mock-dot.g{background:#22c55e}
+  .mock-body{padding:18px}
+  .mock-label{font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+  .mock-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .mock-pill{background:rgba(168,85,247,.15);color:var(--accent);padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600}
+  .mock-line{height:8px;border-radius:4px;background:rgba(255,255,255,.06)}
+  .mock-line.w60{width:60%}.mock-line.w80{width:80%}.mock-line.w45{width:45%}.mock-line.w70{width:70%}
+  .mock-btn{background:var(--accent);color:#fff;border:none;padding:6px 16px;border-radius:8px;font-size:11px;font-weight:600;margin-top:8px}
+
+  /* Features List */
+  .features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:900px;margin:0 auto}
+  .feat{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:16px}
+  .feat .fi{font-size:22px;flex-shrink:0}
+  .feat h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+  .feat p{font-size:12px;color:var(--text-muted)}
+
+  /* What's New */
+  .release{max-width:700px;margin:0 auto}
+  .release-item{border-left:3px solid var(--accent);padding:12px 20px;margin-bottom:16px;background:var(--card);border-radius:0 12px 12px 0}
+  .release-item .ver{font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px}
+  .release-item p{font-size:13px;color:var(--text-muted)}
+
+  /* Store Listing */
+  .store-listing{background:#150f24;border:2px solid var(--card-border);border-radius:16px;padding:36px;max-width:800px;margin:0 auto}
+  .store-listing h3{font-size:18px;font-weight:700;margin-bottom:16px;color:var(--accent)}
+  .store-listing ul{list-style:none;padding:0}
+  .store-listing li{padding:6px 0;font-size:14px;color:var(--text-muted);border-bottom:1px solid rgba(255,255,255,.04)}
+  .store-listing li::before{content:'✓ ';color:var(--accent);font-weight:700}
+  .copy-hint{text-align:center;margin-top:16px;font-size:12px;color:var(--text-muted);opacity:.6}
+
+  @media(max-width:768px){
+    .tools-grid,.mock-section,.features-grid{grid-template-columns:1fr}
+    .hero h1{font-size:32px}
+    .flow{flex-direction:column;align-items:center}
+    .flow-step::after{display:none}
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-icon">&#9997;</div>
+  <h1>SixForge</h1>
+  <p class="tagline">6-in-1 AI Writing Suite</p>
+  <p class="store-desc">6 AI writing tools in one extension. Generate emails, summarize meetings, review code, write blogs, create product copy, and build tweet threads &mdash; all powered by AI.</p>
+  <span class="badge">CHROME EXTENSION</span>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">6 Powerful Tools, One Extension</h2>
+    <p class="section-sub">Every writing task you face, handled by AI in seconds.</p>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="icon">&#9993;</div>
+        <h3>Email Writer</h3>
+        <p>Craft perfect emails in seconds. Reply, cold outreach, follow-up, and apology emails with adjustable tone.</p>
+        <div class="tags"><span class="tag">Reply</span><span class="tag">Cold</span><span class="tag">Follow-up</span><span class="tag">Apology</span><span class="tag">5 Tones</span></div>
+      </div>
+      <div class="tool-card">
+        <div class="icon">&#128221;</div>
+        <h3>Meeting Summarizer</h3>
+        <p>Paste meeting notes and get structured summaries with decisions and action items extracted automatically.</p>
+        <div class="tags"><span class="tag">Decisions</span><span class="tag">Action Items</span><span class="tag">Key Points</span></div>
+      </div>
+      <div class="tool-card">
+        <div class="icon">&#128270;</div>
+        <h3>Code Reviewer</h3>
+        <p>AI code review across 14 languages. Finds bugs, security issues, and performance bottlenecks instantly.</p>
+        <div class="tags"><span class="tag">14 Languages</span><span class="tag">Bugs</span><span class="tag">Security</span><span class="tag">Performance</span></div>
+      </div>
+      <div class="tool-card">
+        <div class="icon">&#128196;</div>
+        <h3>Blog Generator</h3>
+        <p>Full blog posts in 5 styles with SEO optimization. Professional 800-1200 word articles in one click.</p>
+        <div class="tags"><span class="tag">5 Styles</span><span class="tag">SEO</span><span class="tag">800-1200 Words</span></div>
+      </div>
+      <div class="tool-card">
+        <div class="icon">&#128722;</div>
+        <h3>Product Copywriter</h3>
+        <p>Generate marketplace-optimized product descriptions for Amazon, Shopify, eBay, and Etsy listings.</p>
+        <div class="tags"><span class="tag">Amazon</span><span class="tag">Shopify</span><span class="tag">eBay</span><span class="tag">Etsy</span></div>
+      </div>
+      <div class="tool-card">
+        <div class="icon">&#128038;</div>
+        <h3>Tweet Thread Creator</h3>
+        <p>Build viral tweet threads with 5-10 tweets in 5 different styles. Hook, engage, convert.</p>
+        <div class="tags"><span class="tag">5-10 Tweets</span><span class="tag">5 Styles</span><span class="tag">Viral Hooks</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:linear-gradient(180deg,rgba(168,85,247,.04),transparent)">
+  <div class="container">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-sub">From idea to polished content in 4 simple steps.</p>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <h4>Open SixForge</h4>
+        <p>Click the toolbar icon or press Ctrl+Shift+K for the command palette</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <h4>Pick a Tool</h4>
+        <p>Choose from 6 AI writing tools or right-click selected text</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <h4>Enter Context</h4>
+        <p>Paste your input: notes, code, topic, or product details</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <h4>Get Results</h4>
+        <p>AI streams polished output. Copy, favorite, or iterate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">See It In Action</h2>
+    <p class="section-sub">Clean, focused UI designed for speed.</p>
+    <div class="mock-section">
+      <div class="mock">
+        <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>&nbsp; SixForge &mdash; Popup</div>
+        <div class="mock-body">
+          <div class="mock-label">Choose a Tool</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+            <div class="mock-pill">&#9993; Email Writer</div>
+            <div class="mock-pill">&#128221; Summarizer</div>
+            <div class="mock-pill">&#128270; Code Review</div>
+            <div class="mock-pill">&#128196; Blog Gen</div>
+            <div class="mock-pill">&#128722; Product Copy</div>
+            <div class="mock-pill">&#128038; Tweets</div>
+          </div>
+          <div class="mock-label">Recent Favorites</div>
+          <div class="mock-line w80" style="margin-bottom:6px"></div>
+          <div class="mock-line w60"></div>
+        </div>
+      </div>
+      <div class="mock">
+        <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>&nbsp; Email Writer</div>
+        <div class="mock-body">
+          <div class="mock-label">Tone: Professional</div>
+          <div class="mock-row"><span class="mock-pill">Reply</span><span class="mock-pill" style="opacity:.5">Cold</span><span class="mock-pill" style="opacity:.5">Follow-up</span></div>
+          <div style="background:rgba(255,255,255,.03);border-radius:8px;padding:10px;margin:10px 0">
+            <div class="mock-line w80" style="margin-bottom:6px"></div>
+            <div class="mock-line w70" style="margin-bottom:6px"></div>
+            <div class="mock-line w60" style="margin-bottom:6px"></div>
+            <div class="mock-line w45"></div>
+          </div>
+          <div class="mock-row"><button class="mock-btn">Copy</button><button class="mock-btn" style="background:transparent;border:1px solid var(--accent);color:var(--accent)">&#9733; Save</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:linear-gradient(180deg,rgba(168,85,247,.04),transparent)">
+  <div class="container">
+    <h2 class="section-title">Feature Highlights</h2>
+    <p class="section-sub">Built for power users who value speed and quality.</p>
+    <div class="features-grid">
+      <div class="feat"><span class="fi">&#9000;</span><div><h4>Command Palette</h4><p>Ctrl+Shift+K to instantly access any tool from any page.</p></div></div>
+      <div class="feat"><span class="fi">&#9733;</span><div><h4>Favorites System</h4><p>Save up to 50 favorite outputs for quick reuse.</p></div></div>
+      <div class="feat"><span class="fi">&#127912;</span><div><h4>Dark &amp; Light Theme</h4><p>Seamless theme toggle that respects your preference.</p></div></div>
+      <div class="feat"><span class="fi">&#9889;</span><div><h4>Streaming Output</h4><p>See AI responses appear in real-time, word by word.</p></div></div>
+      <div class="feat"><span class="fi">&#128433;</span><div><h4>Context Menu</h4><p>Right-click any selected text to process with any tool.</p></div></div>
+      <div class="feat"><span class="fi">&#127891;</span><div><h4>Onboarding Tour</h4><p>Guided walkthrough for new users to master all 6 tools.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">What's New</h2>
+    <p class="section-sub">Latest updates and improvements.</p>
+    <div class="release">
+      <div class="release-item"><div class="ver">v1.2.0 &mdash; Latest</div><p>Added Tweet Thread Creator with 5 styles. Command palette now supports fuzzy search. Performance improvements across all tools.</p></div>
+      <div class="release-item"><div class="ver">v1.1.0</div><p>Product Copywriter now supports Etsy format. Blog Generator SEO improvements. Favorites capacity increased to 50.</p></div>
+      <div class="release-item"><div class="ver">v1.0.0</div><p>Initial release with Email Writer, Meeting Summarizer, Code Reviewer, Blog Generator, and Product Copywriter.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:linear-gradient(180deg,rgba(168,85,247,.06),transparent)">
+  <div class="container">
+    <h2 class="section-title">Chrome Web Store Listing</h2>
+    <p class="section-sub">Copy-paste ready feature list for your store description.</p>
+    <div class="store-listing">
+      <h3>Feature List</h3>
+      <ul>
+        <li>6 AI writing tools in one extension: Email, Meeting Summary, Code Review, Blog, Product Copy, Tweet Threads</li>
+        <li>Email Writer with Reply, Cold, Follow-up, and Apology templates in 5 tones</li>
+        <li>Meeting Summarizer that extracts decisions and action items automatically</li>
+        <li>Code Reviewer supporting 14 programming languages with bug, security, and performance analysis</li>
+        <li>Blog Generator producing SEO-optimized 800-1200 word articles in 5 styles</li>
+        <li>Product Copywriter for Amazon, Shopify, eBay, and Etsy listings</li>
+        <li>Tweet Thread Creator generating 5-10 tweets in 5 viral styles</li>
+        <li>Command Palette (Ctrl+Shift+K) for instant access from any page</li>
+        <li>Context menu integration: right-click any selected text</li>
+        <li>Favorites system to save up to 50 outputs</li>
+        <li>Dark and Light theme support</li>
+        <li>Streaming AI output for real-time feedback</li>
+        <li>Guided onboarding tour for new users</li>
+      </ul>
+      <p class="copy-hint">Select all text above and copy for your Chrome Web Store listing</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
