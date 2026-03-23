@@ -1,3 +1,5 @@
+<p align="center"><img src="public/icons/logo.svg" width="128" height="128" alt="SixForge Logo"></p>
+
 # SixForge — 6-in-1 AI Writing Suite
 
 ![Version](https://img.shields.io/badge/version-1.0.0-7c3aed?style=flat-square)
@@ -92,11 +94,12 @@ ai-toolbox-ext/
 ## Screenshots
 
 <p align="center">
-  <img src="public/icons/icon128.png" alt="SixForge Icon" width="128" />
+  <img src="public/icons/logo.svg" alt="SixForge Logo" width="128" />
 </p>
 
 | Icon | Size |
 |------|------|
+| ![Logo](public/icons/logo.svg) | SVG Logo |
 | ![16px](public/icons/icon16.png) | 16x16 |
 | ![32px](public/icons/icon32.png) | 32x32 |
 | ![48px](public/icons/icon48.png) | 48x48 |
