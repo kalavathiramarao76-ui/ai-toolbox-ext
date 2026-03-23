@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.2)"/>
+      <stop offset="50%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="128" height="128" rx="28" fill="url(#bg)"/>
+  <!-- Shine -->
+  <rect width="128" height="128" rx="28" fill="url(#shine)"/>
+  <!-- Hexagon -->
+  <polygon points="64,22 97,41 97,79 64,98 31,79 31,41" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Inner hexagon outline -->
+  <polygon points="64,30 91,45.5 91,76.5 64,92 37,76.5 37,45.5" fill="none" stroke="white" stroke-width="1.5" stroke-linejoin="round" opacity="0.3"/>
+  <!-- Number 6 -->
+  <text x="64" y="72" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="40" fill="white">6</text>
+</svg>
